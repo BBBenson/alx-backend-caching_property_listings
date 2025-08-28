@@ -76,7 +76,31 @@ WSGI_APPLICATION = 'alx_backend_caching_property_listings.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 # DATABASES = db.MYSQL
-DATABASES = db.POSTGRESQL
+# DATABASES = db.POSTGRESQL
+
+# For local PostgreSQL installation
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'property_db',
+        'USER': 'postgres',
+        'PASSWORD': 'admin@12345',
+        'HOST': 'localhost',
+        'PORT': '5433',
+        'ATOMIC_REQUESTS': True
+    }
+}
+
+# For local Redis installation
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
 
 CACHES = {
     "default": {
